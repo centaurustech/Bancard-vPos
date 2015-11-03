@@ -8,7 +8,7 @@ class Bancard_model extends CI_Model {
 	
     function __construct()
     {
-		global $DB;
+	global $DB;
         parent::__construct();
         $this->db = $DB;										// SIMPLEPDO INSTANCE	
         $this->createTable();									
@@ -64,7 +64,7 @@ class Bancard_model extends CI_Model {
 		
 		if($resp->status == "success"){
 			$shop_process_id = $this->setProcessID($shop_process_id,$resp->process_id);
-			echo "<script> location.href = '".$this->url."/single_buy?process_id=".$resp->process_id."' </script>";
+			echo "<script> location.href = '".$this->url."/payment/single_buy?process_id=".$resp->process_id."' </script>";
 		}else{
 			
 		}
