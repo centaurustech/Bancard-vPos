@@ -157,7 +157,7 @@ class Bancard_model extends CI_Model {
 		
 		$sql = "SELECT * FROM vpos WHERE UsrCod = '{$UsrCod}' ORDER BY VpDate DESC LIMIT 1";
 		$result = $this->db->getObject($sql);
-		return $result->row()->VpCod;
+		return $result[0]->VpCod;
 	}
 	
 	private function setProcessID($shop_process_id,$process_id){
@@ -193,7 +193,7 @@ class Bancard_model extends CI_Model {
 	public function lastBuy($UsrCod){
 		$sql = "SELECT * FROM vpos WHERE UsrCod = '{$UsrCod}' ORDER BY VpDate DESC LIMIT 1";
 		$result = $this->db->getObject($sql);
-		return $result->row();
+		return $result[0];
 	}
 
 	private function saveRollback($data){
