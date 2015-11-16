@@ -20,8 +20,8 @@ class Bancard_model extends CI_Model {
 		$this->url = "https://vpos.infonet.com.py:8888";		// DEVELOPMENT
 		
 		$this->description = "";
-		$this->return_url = ROOT_DIR."/vpos/returnvpos";
-		$this->cancel_url = ROOT_DIR."/vpos/cancel";
+		$this->return_url = ROOT_DIR."vpos/returnvpos";			// LA DIRECCION RAIZ DE LA APLICACION
+		$this->cancel_url = ROOT_DIR."vpos/cancel";			// DEFINIR ANTES DE LLAMAR A LA LIBRERIA
     }
 
 	public function single_buy($data){
@@ -70,6 +70,49 @@ class Bancard_model extends CI_Model {
 		}
 		
 		// EXAMPLE:  https://vpos.infonet.com.py/payment/single_buy?process_id=1veY2NMX3Od751Lu0sK5 
+	}
+	
+	public function getConfirmation($shop_process_id){
+		
+		// $shop_process_id = $data['shop_process_id'];
+		
+		$this->token = md5($this->privateKey . $shop_process_id . "get_confirmation");
+		// $this->token = md5($this->privateKey . $shop_process_id . "rollback" . "0.00");
+		// echo $this->privateKey . $shop_process_id . "rollback" . "0.00";
+		
+		$request = array(
+			"public_key" => $this -> publicKey,
+			"operation" => array(
+				"token" => $this->token,
+				"shop_process_id" => $shop_process_id
+			),
+			"test_client" => true
+		);
+		
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => $this -> url . "/vpos/api/0.3/single_buy/confirmations",
+			CURLOPT_RETURNTRANSFER => 1,
+			CURLOPT_POST => 1,
+			CURLOPT_POSTFIELDS => json_encode($request)
+		));
+		
+		$resp = curl_exec($curl);
+		curl_close($curl);
+		
+		if(is_string($resp)) $resp = json_decode($resp,true);
+		
+		// var_dump($resp);
+		
+		if($resp['confirmation']['response_code'] == "00"){
+			$resp['confirmation']['VpStatus'] = "aprobado";
+		}else{
+			$resp['confirmation']['VpStatus'] = "rechazado";
+		}
+		
+		$this->bancard_model->confirm($resp['confirmation']);
+		
+		return $resp['confirmation'];
 	}
 	
 	public function rollback($shop_process_id){
