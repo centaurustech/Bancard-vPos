@@ -4,22 +4,22 @@ Con esta clase se reducen los tiempos de desarrollo de la pasarela de pago y se 
 
 ##Requerimientos	
 ####  Conexión a Base de Datos
-	Necesario para guardar las transacciones en la aplicación.
-	Por defecto esta clase utiliza SimplePDO, una librería de conexion y manipulación de datos en MySQL o PgSQL por medio de PDO.
-		
-	Para bajar SimplePDO: https://github.com/rodolrojas/SimplePDO
-	
-	Pueden utilizarse otras clases de conexión (mysql_connect, mysqli, PDO crudo, Active Record, etc.),
-	pero deberán cambiarse todas las funciones que impliquen manipulación de datos de acuerdo a la librería escogida. 
+Necesario para guardar las transacciones en la aplicación.
+Por defecto esta clase utiliza SimplePDO, una librería de conexion y manipulación de datos en MySQL o PgSQL por medio de PDO.
+
+Para bajar SimplePDO: https://github.com/rodolrojas/SimplePDO
+
+Pueden utilizarse otras clases de conexión (mysql_connect, mysqli, PDO crudo, Active Record, etc.),
+pero deberán cambiarse todas las funciones que impliquen manipulación de datos de acuerdo a la librería escogida. 
 
 ####	Claves de la API de Bancard
-	Estas claves se obtienen del Portal de Comercios de Bancard
+Estas claves se obtienen del Portal de Comercios de Bancard
 
 ####	URLs de la plataforma de pagos
-	Son propios de Bancard. No deben alterarse
+Son propios de Bancard. No deben alterarse
 	
 ####	URLs de retorno de la Aplicación
-	Son los controladores a los que se accede una vez que se finaliza o cancela la transaccion.
+Son los controladores a los que se accede una vez que se finaliza o cancela la transaccion.
 #####	NO DEBEN CONFUNDIRSE CON LA URL DE CONFIRMACIÓN!!!
 
 
