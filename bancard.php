@@ -34,8 +34,8 @@ class Bancard {
 		Estas claves se obtienen del Portal de Comercios de Bancard
 	*/
 		
-		$this->publicKey = "iiojOnPoAURd3h6MPsDKO2FCf7pJoTtd";									// CLAVE PUBLICA DE BANCARD
-		$this->privateKey = "EPbaEAEhjSgVwsFv+VqWGQ95o9wejni2UfgmKYaR";									// CLAVE PRIVADA DE BANCARD
+		$this->publicKey = "";									// CLAVE PUBLICA DE BANCARD
+		$this->privateKey = "";									// CLAVE PRIVADA DE BANCARD
 	
 	/*
 		URLs DE LA PLATAFORMA DE PAGOS
